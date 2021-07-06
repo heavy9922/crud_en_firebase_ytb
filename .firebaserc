@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "crudemployee-4c77f": {
+      "hosting": {
+        "crudfire": [
+          "crudemployee-4c77f"
+        ]
+      }
+    }
+  }
+}
