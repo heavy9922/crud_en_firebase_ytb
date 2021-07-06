@@ -11,6 +11,7 @@ import { EmployeeFormModule } from './shared/componets/employee-form/employee-fo
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule} from '@angular/fire/firestore'
 import { environment } from 'src/environments/environment';
+import { EmployeesService } from './pages/services/employees.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { environment } from 'src/environments/environment';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     
   ],
-  providers: [AngularFirestoreModule],
+  providers: [AngularFirestoreModule, EmployeesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

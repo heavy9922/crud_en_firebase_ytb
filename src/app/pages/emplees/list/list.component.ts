@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { EmployeesService } from '../../services/employees.service';
 
 @Component({
   selector: 'app-list',
@@ -7,47 +8,15 @@ import { NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
+  
+  employeeXD = this.employeesSvc.employees;
+
   navigationExtras: NavigationExtras = {
     state: {
       value: null,
     },
   };
-
-  fakeData=[
-    {
-      name:'yeferson',
-      lastname:'castiblanco',
-      email:'ycasti@gmail.com',
-      startDate:'2021-07-05'
-    },
-    {
-      name:'paola',
-      lastname:'castiblanco',
-      email:'pcasti@gmail.com',
-      startDate:'2021-07-11'
-    },
-    {
-      name:'yeferson',
-      lastname:'castiblanco',
-      email:'ycasti@gmail.com',
-      startDate:'2021-07-05'
-    },
-    {
-      name:'yeferson',
-      lastname:'castiblanco',
-      email:'ycasti@gmail.com',
-      startDate:'2021-07-05'
-    },
-    {
-      name:'yeferson',
-      lastname:'castiblanco',
-      email:'ycasti@gmail.com',
-      startDate:'2021-07-05'
-    }
-    
-  ]
-
-  constructor(private router: Router) {}
+  constructor(private router: Router,private employeesSvc:EmployeesService) {}
 
   ngOnInit(): void {}
 
@@ -59,11 +28,15 @@ export class ListComponent implements OnInit {
 
   onGoToSee(row: any): void {
     this.navigationExtras.state!.value = row;
-
     this.router.navigate(['details'], this.navigationExtras);
   }
 
-  onGoToDelete(row: any): void {
-    alert('deleted successfully');
+  async onGoToDelete(empId:any): Promise<void> {
+    try{
+      await this.employeesSvc.onDelete(empId)
+      alert('deleted succesfully')
+    }catch(err){
+      console.error(err)
+    }
   }
 }
